@@ -1,5 +1,6 @@
 import unittest as test
-from src.desmosShapes import *
+from src.closedShapes import *
+from src.openShapes import *
 
 class Circles(test.TestCase):
 	def testPointCoordinates(self):
@@ -9,13 +10,17 @@ class Circles(test.TestCase):
 	
 	def testCircleCentre(self):
 		newShape = Circle(Point(1,2),3)
-		actual = newShape.getCentre().x, newShape.getCentre().y
+		actual = newShape.Centre.x, newShape.Centre.y
 		self.assertEqual(actual, (1,2))
 
 	def testCircleShapeType(self):
 		newShape = Circle(Point(1,2),2)
 		actual = newShape.shapeType
 		self.assertEqual(actual, "circle")
+
+	def testEllipse(self):
+		newShape = Ellipse(Point(0,0),3,xStretch=0.5,yStretch=2)
+		newShape.writeEquation("output/EllipseTest")
 		
 
 class Lines(test.TestCase):
@@ -87,6 +92,10 @@ class Polygons(test.TestCase):
 	def testPolygonCreation(self):
 		newShape = Polygon([Point(1,2),Point(3,4),Point(3,6)])
 		newShape.writeEquation("output/polygonThreeTest")
+
+	def testTwoPointPolygon(self):
+		with self.assertRaises(NotEnoughInfo):
+			newShape = Polygon([Point(1,2),Point(3,4)])
 
 	def testTwoPointPolygon(self):
 		with self.assertRaises(NotEnoughInfo):
