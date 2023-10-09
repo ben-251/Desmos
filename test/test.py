@@ -65,13 +65,13 @@ class Lines(test.TestCase):
 			[Point(0.2,4)],
 			gradient=0.5
 		)
-		newLine.writeEquation("OnePoint.txt")
+		newLine.writeEquation("output/OnePoint.txt")
 	
 	def testMakeEquationTwoPoints(self):
 		newLine = Line(
 			[Point(1,3),Point(2,5)]
 		)
-		newLine.writeEquation("TwoPoint.txt")
+		newLine.writeEquation("output/TwoPoint.txt")
 
 	def testZeroGradientTwoPoint(self):
 		newLine = Line(
@@ -82,3 +82,12 @@ class Lines(test.TestCase):
 		newLine = Line(
 			[Point(0,0)],gradient=0
 		)		
+		
+class Polygons(test.TestCase):
+	def testPolygonCreation(self):
+		newShape = Polygon([Point(1,2),Point(3,4),Point(3,6)])
+		newShape.writeEquation("output/polygonThreeTest")
+
+	def testTwoPointPolygon(self):
+		with self.assertRaises(NotEnoughInfo):
+			newShape = Polygon([Point(1,2),Point(3,4)])

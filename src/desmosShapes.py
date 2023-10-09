@@ -11,6 +11,9 @@ class Point:
 			self.x = x
 			self.y = y
 
+	def __str__(self):
+		return f"\\left({self.x},{self.y}\\right)"
+
 class Shape:
 	_shapeType = "default"
 
@@ -74,6 +77,27 @@ class Circle(Shape):
 		equation = f"\left(x-{self._centre.x}\\right)^{{2}}+\left(y-{self._centre.y}\\right)^{{2}}=r^{{2}}"
 		return equation
 
+class Polygon(Shape):
+	def __init__(self,points):
+		self.Validate(points)
+		self.points = points
+	
+	def Validate(self, points):
+		#TODO: avoid duplicates
+		#TODO: at least 3 points
+		pass
 
+	def formEquation(self):
+		equation_head = f"\\operatorname{{polygon}}\\left("
+		equation_tail = "\\right)"
+		equation_body = ""
 
+		for i, point in enumerate(self.points):
+			equation_body += str(point)
+			if i != len(self.points) - 1:
+				equation_body += ","
+		
+		return f"{equation_head}{equation_body}{equation_tail}"
+
+		
 
