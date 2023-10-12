@@ -10,12 +10,32 @@ class Shape:
 	_shapeType = "default"
 
 	def formEquation(self):		
-		raise NotImplementedError
+		equation = self.getRawEquation()
+		equation = self.removeDoubleNegatives(equation)
+		return equation
 
 	def writeEquation(self,filename):
 		equation = self.formEquation()
 		with open(filename,"w") as f:
 			f.write(equation)
+
+	def removeDoubleNegatives(self,equation):
+		newEquation = ""
+		skip = False
+		for index in range(len(equation)):
+			if skip:
+				skip = False
+				continue
+			if equation[index] == "-" and equation[index+1] == "-":
+				newEquation += "+"
+				skip = True
+				continue
+			newEquation += equation[index]
+			skip = False
+		return newEquation
+
+	def getRawEquation(self):
+		return NotImplementedError
 
 	@property
 	def shapeType(self):

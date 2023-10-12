@@ -15,8 +15,8 @@ class Circle(Shape):
 	def Radius(self):
 		return self._radius
 		
-	def formEquation(self):
-		equation = f"\\left(x-{self._centre.x}\\right)^{{2}}+\left(y-{self._centre.y}\\right)^{{2}}=r^{{2}}"
+	def getRawEquation(self):
+		equation = f"\\left(x-{self._centre.x}\\right)^{{2}}+\left(y-{self._centre.y}\\right)^{{2}}={self._radius}^{{2}}"
 		return equation
 
 
@@ -27,7 +27,7 @@ class Ellipse(Circle):
 		self._xStretch = xStretch
 		self._yStretch = yStretch
 	
-	def formEquation(self):
+	def getRawEquation(self):
 		return f"\\left(\\frac{{x-{self.Centre.x}}}{{{self._xStretch}}}\\right)^{{2}}+\\left(\\frac{{y-{self.Centre.y}}}{{{self._yStretch}}}\\right)^{{2}}={self.Radius}^{{2}}"
 
 class Polygon(Shape):
@@ -41,7 +41,7 @@ class Polygon(Shape):
 			raise NotEnoughInfo("too few points. please input at least 3 points.")
 		pass
 
-	def formEquation(self):
+	def getRawEquation(self):
 		equation_head = f"\\operatorname{{polygon}}\\left("
 		equation_tail = "\\right)"
 		equation_body = ""

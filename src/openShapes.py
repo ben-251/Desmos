@@ -24,13 +24,13 @@ class Line(Shape):
 			return True
 		pass #TODO: finish this.
 
-	def formEquation(self):
+	def getRawEquation(self):
 		#TODO: simplify horizontals to y = a
 		if self.gradient is None:
 			self.gradient = self.findGradient()
 
 		firstPoint = self.points[0]
-		equation = f"y\\ -\\ {firstPoint.y}={self.gradient}\\left(x-{firstPoint.x}\\right)"
+		equation = f"y-{firstPoint.y}={self.gradient}\\left(x-{firstPoint.x}\\right)"
 		return equation
 
 	def findGradient(self): 
@@ -39,3 +39,7 @@ class Line(Shape):
 		secondPoint = self.points[1]
 		gradient = (secondPoint.y - firstPoint.y)/(secondPoint.x - firstPoint.x)
 		return gradient
+
+class BezierCurve(Shape):
+	def __init__(self,points):
+		pass
