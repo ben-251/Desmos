@@ -3,3 +3,6 @@ class NotEnoughInfo(Exception):
 
 class UndefinedGradient(Exception):
 	pass
+
+class NotCollinear(Exception):
+	pass

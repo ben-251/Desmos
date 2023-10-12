@@ -22,7 +22,20 @@ class Line(Shape):
 	def isCollinear(self, points):
 		if len(points) < 3:
 			return True
-		pass #TODO: finish this.
+		gradients = []
+		for index,point in enumerate(points):
+			if index == len(points)-1:
+				break
+			nextPoint = points[index+1]
+			try:
+				gradient = (nextPoint.y - point.y)/(nextPoint.x - point.x)
+			except ZeroDivisionError:
+				gradient = "undefined"
+			gradients.append(gradient)
+			if not all(gradient == gradients[0] for gradient in gradients):
+				return False
+		return True
+		
 
 	def getRawEquation(self):
 		#TODO: simplify horizontals to y = a

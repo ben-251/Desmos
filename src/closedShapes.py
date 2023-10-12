@@ -2,7 +2,11 @@ from src.errors import *
 from src.fundamentals import *
 
 class Circle(Shape):
-	def __init__(self,centre,radius):
+	def __init__(self,centre=None,radius=None):
+		if centre is None:
+			centre = Point(0,0)
+		if radius is None:
+			radius = 1
 		self._centre = centre
 		self._radius = radius
 		self._shapeType = "circle"
