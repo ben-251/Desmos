@@ -26,18 +26,23 @@ class Line(Shape):
 
 	def getRawEquation(self):
 		#TODO: simplify horizontals to y = a
-		if self.gradient is None:
-			self.gradient = self.findGradient()
-
 		firstPoint = self.points[0]
-		equation = f"y-{firstPoint.y}={self.gradient}\\left(x-{firstPoint.x}\\right)"
+		try:
+			if self.gradient is None:
+				self.gradient = self.findGradient()	
+			equation = f"y-{firstPoint.y}={self.gradient}\\left(x-{firstPoint.x}\\right)"
+		except UndefinedGradient:
+			equation = f"x={firstPoint.x}"
 		return equation
 
 	def findGradient(self): 
 		#TODO: handle gradient undefined as an UndefinedGradient error and then write the code for handling that exception in the form equation method 
 		firstPoint = self.points[0]
 		secondPoint = self.points[1]
-		gradient = (secondPoint.y - firstPoint.y)/(secondPoint.x - firstPoint.x)
+		try:
+			gradient = (secondPoint.y - firstPoint.y)/(secondPoint.x - firstPoint.x)
+		except ZeroDivisionError:
+			raise UndefinedGradient
 		return gradient
 
 class BezierCurve(Shape):
