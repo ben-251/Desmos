@@ -12,6 +12,7 @@ class Shape:
 	def formEquation(self):		
 		equation = self.getRawEquation()
 		equation = self.removeDoubleNegatives(equation)
+		equation = self.stripIntegers(equation)
 		return equation
 
 	def writeEquation(self,filename):
@@ -28,6 +29,20 @@ class Shape:
 				continue
 			if equation[index] == "-" and equation[index+1] == "-":
 				newEquation += "+"
+				skip = True
+				continue
+			newEquation += equation[index]
+			skip = False
+		return newEquation
+
+	def stripIntegers(self,equation):
+		newEquation = ""
+		skip = False
+		for index in range(len(equation)):
+			if skip:
+				skip = False
+				continue
+			if equation[index] == "." and equation[index+1] == "0":
 				skip = True
 				continue
 			newEquation += equation[index]

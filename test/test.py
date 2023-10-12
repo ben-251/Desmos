@@ -39,7 +39,7 @@ class Lines(test.TestCase):
 		newLine = Line(
 			[ Point(1,3), Point(2,5) ]
 		)
-		self.assertEqual(newLine.formEquation(),r"y-3=2.0\left(x-1\right)")
+		self.assertEqual(newLine.formEquation(),r"y-3=2\left(x-1\right)")
 
 	def testOnePointWithGradient(self):
 		newLine = Line(
@@ -51,8 +51,9 @@ class Lines(test.TestCase):
 	
 	def testDecimalTwoPoint(self):
 		newLine = Line(
-			[ Point(1.1,3), Point(1,4.2) ]
+			[ Point(1.1,3), Point(2.1,4) ]
 		)		
+		self.assertEqual(newLine.formEquation(),r"y-3=1\left(x-1.1\right)")
 
 	def testDecimalGradient(self):
 		newLine = Line(
@@ -66,34 +67,29 @@ class Lines(test.TestCase):
 				[Point(1,2)],
 				gradient="a"
 			)
-	
-	def testMakeEquationOnePoint(self):
-		newLine = Line(
-			[Point(0.2,4)],
-			gradient=0.5
-		)
-		newLine.writeEquation("output/OnePoint.txt")
-	
-	def testMakeEquationTwoPoints(self):
-		newLine = Line(
-			[Point(1,3),Point(2,5)]
-		)
-		newLine.writeEquation("output/TwoPoint.txt")
 
 	def testZeroGradientTwoPoint(self):
 		newLine = Line(
 			[Point(0,0), Point(2,0)]
 		)
+		self.assertEqual(newLine.formEquation(),r"y-0=0\left(x-0\right)")
 	
 	def testZeroGradientOnePoint(self):
 		newLine = Line(
 			[Point(0,0)],gradient=0
-		)		
-		
+		)
+		self.assertEqual(newLine.formEquation(),r"y-0=0\left(x-0\right)")		
+
+	def testVertical(self):
+		newLine = Line(
+			[Point(2,0), Point(2,3)]
+		)
+		self.assertEqual(newLine.formEquation(),r"x=2")
+
 class Polygons(test.TestCase):
 	def testPolygonCreation(self):
 		newShape = Polygon([Point(1,2),Point(3,4),Point(3,6)])
-		newShape.writeEquation("output/polygonThreeTest")
+		self.assertEqual(newShape.formEquation(),r"\operatorname{polygon}\left(\left(1,2\right),\left(3,4\right),\left(3,6\right)\right)")
 
 	def testTwoPointPolygon(self):
 		with self.assertRaises(NotEnoughInfo):

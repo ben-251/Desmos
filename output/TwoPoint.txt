@@ -1,1 +1,1 @@
-y-3=2.0\left(x-1\right)
+y-3=2\left(x-1\right)
